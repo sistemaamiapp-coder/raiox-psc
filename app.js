@@ -392,7 +392,7 @@
     const techs = Array.from(new Set(list.map(r => r.technician))).sort((a, b) => a.localeCompare(b, 'pt-BR'));
     const el = $('#dayTechs');
     if (!techs.length) {
-      el.innerHTML = `<span class="chip empty">Nenhum registro no período</span>`;
+      el.innerHTML = `<span class="chip is-empty">Nenhum registro no período</span>`;
       return;
     }
     el.innerHTML = techs.map(t => `<span class="chip">${esc(t)}</span>`).join('');

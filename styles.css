@@ -166,8 +166,11 @@ body {
   color: var(--muted);
 }
 .daybar-label svg { width: 17px; height: 17px; color: var(--cyan); opacity: 0.85; }
-.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 27px;
   padding: 5px 12px;
   border: 1px solid var(--cyan-line);
   background: rgba(0, 240, 255, 0.05);
@@ -176,11 +179,12 @@ body {
   font-family: var(--mono);
   font-size: 11.5px;
   font-weight: 600;
+  line-height: 1.2;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
 }
-.chip.empty { border-color: var(--border); background: transparent; color: var(--muted-2); }
+.chip.is-empty { border-color: var(--border); background: transparent; color: var(--muted-2); }
 
 /* ---------- layout ---------- */
 .main {
@@ -969,12 +973,35 @@ button:focus:not(:focus-visible) { outline: none; }
 
 @media (max-width: 700px) {
   .container { padding: 0 16px; }
-  .topbar-inner { gap: 12px; flex-wrap: wrap; }
-  .brand-logo { height: 42px; max-width: 220px; }
-  .brand-text h1 { font-size: 16px; }
-  .brand-text .eyebrow { font-size: 9px; letter-spacing: 0.16em; }
-  .btn-reset { padding: 9px 13px; font-size: 12px; }
-  .btn-reset svg { width: 16px; height: 16px; }
+  .topbar { position: static; }
+  .topbar-inner {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    padding-top: 10px;
+    padding-bottom: 14px;
+  }
+  .brand-logo { height: 36px; max-width: 178px; order: 1; }
+  .brand-text { order: 3; flex: 1 1 100%; }
+  .brand-text h1 { font-size: 17px; line-height: 1.25; }
+  .brand-text .eyebrow { margin-top: 4px; font-size: 8.5px; letter-spacing: 0.15em; }
+  .btn-reset { order: 2; margin-left: auto; gap: 7px; padding: 8px 12px; font-size: 11.5px; border-radius: 10px; }
+  .btn-reset svg { width: 15px; height: 15px; }
+  .btn-reset span { white-space: nowrap; }
+  .daybar-inner { flex-wrap: nowrap; gap: 10px 12px; padding-top: 8px; padding-bottom: 8px; }
+  .daybar-label { flex: none; font-size: 10px; gap: 7px; }
+  .daybar-label svg { width: 15px; height: 15px; }
+  .chips {
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; padding: 5px 9px; font-size: 10px; letter-spacing: 0.07em; }
+  .main { padding-top: 14px; }
   .stats { grid-template-columns: 1fr; }
   .reports { grid-template-columns: 1fr; }
   .reports .report-card:last-child { grid-column: span 1; }
