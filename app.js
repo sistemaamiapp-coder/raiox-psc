@@ -14,20 +14,30 @@
   const PAGE_SIZE = 25;
   const LOAD_MORE = 50;
 
-  const EXAM_TYPES = [
-    'Abdômen', 'Abdômen agudo', 'Arcos costais', 'Bacia', 'Cavum',
-    'Coluna cervical', 'Coluna lombar', 'Coluna dorsal', 'Coluna sacrococcígea',
-    'Coluna total', 'Cranio', 'Escanometria', 'Esterno', 'Face', 'Órbitas',
-    'Ossos da face', 'Ossos nasais', 'Seios da face', 'Sela túrcica', 'Tórax',
-    'Tórax perfil',
-    'Antebraço (Esquerdo)', 'Antebraço (Direito)', 'Braço (Esquerdo)', 'Braço (Direito)',
-    'Calcâneo (Esquerdo)', 'Calcâneo (Direito)', 'Clavícula (Esquerda)', 'Clavícula (Direita)',
-    'Cotovelo (Esquerdo)', 'Cotovelo (Direito)', 'Coxa (Esquerda)', 'Coxa (Direita)',
-    'Coxofemoral (Esquerdo)', 'Coxofemoral (Direito)', 'Dedo (Esquerdo)', 'Dedo (Direito)',
-    'Escápula (Esquerda)', 'Escápula (Direita)', 'Joelho (Esquerdo)', 'Joelho (Direito)',
-    'Mão (Esquerda)', 'Mão (Direita)', 'Ombro (Esquerdo)', 'Ombro (Direito)',
-    'Pé (Esquerdo)', 'Pé (Direito)', 'Perna (Esquerda)', 'Perna (Direita)',
-    'Punho (Esquerdo)', 'Punho (Direito)', 'Tornozelo (Esquerdo)', 'Tornozelo (Direito)'
+  const EXAM_GROUPS = [
+    {
+      label: 'Exames Unilaterais',
+      types: [
+        'Abdômen', 'Abdômen agudo', 'Arcos costais', 'Bacia', 'Cavum',
+        'Coluna cervical', 'Coluna lombar', 'Coluna dorsal', 'Coluna sacrococcígea',
+        'Coluna total', 'Cranio', 'Escanometria', 'Esterno', 'Face', 'Órbitas',
+        'Ossos da face', 'Ossos nasais', 'Seios da face', 'Sela túrcica', 'Tórax',
+        'Tórax perfil'
+      ]
+    },
+    {
+      label: 'Exames Bilaterais',
+      types: [
+        'Antebraço (Esquerdo)', 'Antebraço (Direito)', 'Braço (Esquerdo)', 'Braço (Direito)',
+        'Calcâneo (Esquerdo)', 'Calcâneo (Direito)', 'Clavícula (Esquerda)', 'Clavícula (Direita)',
+        'Cotovelo (Esquerdo)', 'Cotovelo (Direito)', 'Coxa (Esquerda)', 'Coxa (Direita)',
+        'Coxofemoral (Esquerdo)', 'Coxofemoral (Direito)', 'Dedo (Esquerdo)', 'Dedo (Direito)',
+        'Escápula (Esquerda)', 'Escápula (Direita)', 'Joelho (Esquerdo)', 'Joelho (Direito)',
+        'Mão (Esquerda)', 'Mão (Direita)', 'Ombro (Esquerdo)', 'Ombro (Direito)',
+        'Pé (Esquerdo)', 'Pé (Direito)', 'Perna (Esquerda)', 'Perna (Direita)',
+        'Punho (Esquerdo)', 'Punho (Direito)', 'Tornozelo (Esquerdo)', 'Tornozelo (Direito)'
+      ]
+    }
   ];
 
   const MONTHS = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
@@ -331,7 +341,10 @@
       </div>
       <select aria-label="Tipo de exame">
         <option value="">Selecione o tipo</option>
-        ${EXAM_TYPES.map(t => `<option value="${esc(t)}"${t === value ? ' selected' : ''}>${esc(t)}</option>`).join('')}
+        ${EXAM_GROUPS.map(g => `
+          <optgroup label="${esc(g.label)}">
+            ${g.types.map(t => `<option value="${esc(t)}"${t === value ? ' selected' : ''}>${esc(t)}</option>`).join('')}
+          </optgroup>`).join('')}
       </select>
     `;
     return row;
